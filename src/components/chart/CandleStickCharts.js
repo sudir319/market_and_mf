@@ -1,64 +1,153 @@
-import React, { Component } from 'react'
-import ApexChart from './ApexChart';
+import React, { Component } from "react";
+import ApexChart from "./ApexChart";
 
 class CandleStickCharts extends Component {
-    constructor(props) {
-      super(props)
-      const date = new Date();
-      date.setDate(date.getDate() - 7);
+  constructor(props) {
+    super(props);
+    const date = new Date();
+    date.setDate(date.getDate() - 7);
 
-      this.state = {
-         data: this.props.data,
-         history : ['Week', 'Month', '3 Months', '6 Months', '1 Year'],
-         currentDuration: 'Week',
-         maxDate: date
-      }
-    }
+    this.state = {
+      data: this.props.data,
+      history: ["Week", "Month", "3 Months", "6 Months", "1 Year"],
+      currentDuration: "Week",
+      maxDate: date,
+      showBullish: false,
+      showBearish: false,
+    };
+  }
 
-    specifyPeriod = (duration) => {
-        let date = new Date();
-        switch(duration) {
-            case 'Week': date.setDate(date.getDate() - 7); break;
-            case 'Month': date.setMonth(date.getMonth() - 1); break;
-            case '3 Months': date.setMonth(date.getMonth() - 3); break;
-            case '6 Months': date.setMonth(date.getMonth() - 6); break;
-            case '1 Year': date.setYear(date.getYear() - 1); break;
-            default: break;
+  toggleShowBullish = (e) => {
+    this.setState((prevState) => ({
+      showBullish: !this.state.showBullish,
+    }));
+    return false;
+  };
+
+  toggleShowBearish = (e) => {
+    this.setState((prevState) => ({
+      showBearish: !this.state.showBearish,
+    }));
+    return false;
+  };
+
+  filterCandleData = (candleData) => {
+    const newCandleData = {};
+    if (this.state.showBullish || this.state.showBearish) {
+      Object.keys(candleData).forEach((symbol) => {
+        let lastCandle = candleData[symbol][candleData[symbol].length - 1];
+        if (
+          (this.state.showBullish && lastCandle.close > lastCandle.open) ||
+          (this.state.showBearish && lastCandle.close < lastCandle.open)
+        ) {
+          newCandleData[symbol] = candleData[symbol];
         }
+      });
+      return newCandleData;
+    } else {
+      return candleData;
+    }
+  };
 
-        this.setState({...this.state, maxDate: date, currentDuration: duration});
+  specifyPeriod = (duration) => {
+    let date = new Date();
+    switch (duration) {
+      case "Week":
+        date.setDate(date.getDate() - 7);
+        break;
+      case "Month":
+        date.setMonth(date.getMonth() - 1);
+        break;
+      case "3 Months":
+        date.setMonth(date.getMonth() - 3);
+        break;
+      case "6 Months":
+        date.setMonth(date.getMonth() - 6);
+        break;
+      case "1 Year":
+        date.setYear(date.getYear() - 1);
+        break;
+      default:
+        break;
     }
 
-    render() {
-        return (
+    this.setState({ ...this.state, maxDate: date, currentDuration: duration });
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ data: nextProps.data });
+  }
+
+  schollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  render() {
+    let candleData = this.filterCandleData(this.state.data);
+
+    return (
+      <div>
+        <div align="center" style={{ position: "fixed", zIndex: 99 }}>
+          <table style={{ tableCollapse: "collapse" }}>
+            <tbody>
+              <tr>
+                {this.state.history.map((eachDuration) => (
+                  <td>
+                    <button onClick={() => this.specifyPeriod(eachDuration)}>
+                      {eachDuration === this.state.currentDuration ? (
+                        <b>{eachDuration}</b>
+                      ) : (
+                        eachDuration
+                      )}
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </td>
+                ))}
+                <td>
+                  <button onClick={(event) => this.schollToTop()}>
+                    Scroll to Top
+                  </button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    value={this.state.showBullish}
+                    onClick={(event) => this.toggleShowBullish()}
+                  />
+                  Show Bullish
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    value={this.state.showBearish}
+                    onClick={(event) => this.toggleShowBearish()}
+                  />
+                  Show Bearish
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br />
+        <hr />
         <div>
-            <div align="center" style={{position: 'fixed', zIndex: 99}}>
-                <table style={{tableCollapse:'collapse'}}>
-                    <tr>
-                        {
-                            this.state.history.map(
-                                eachDuration => <td><button onClick={() => this.specifyPeriod(eachDuration)}>
-                                    {eachDuration === this.state.currentDuration ? 
-                                        <b>{eachDuration}</b> : eachDuration}
-                                    </button>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </td>
-                            )
-                        }
-                    </tr>
-                </table>
-            </div>
-            <br/>
-            <hr/>
-            <div >
-                {
-                    Object.keys(this.state.data).sort()
-                    .map((symbol, id) => <ApexChart key = {id} symbol={symbol}
-                        maxDate={this.state.maxDate} candleData={this.state.data[symbol]}/>)
-                }
-            </div>
-        </div>)
-    }
+          {Object.keys(candleData).length > 0 &&
+            Object.keys(candleData)
+              .sort()
+              .map((symbol, id) => (
+                <ApexChart
+                  key={id}
+                  symbol={symbol}
+                  maxDate={this.state.maxDate}
+                  candleData={candleData[symbol]}
+                />
+              ))}
+        </div>
+      </div>
+    );
+  }
 }
 
-export default CandleStickCharts
+export default CandleStickCharts;

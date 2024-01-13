@@ -1,7 +1,6 @@
-
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import MFDashboard from './MFDashboard';
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import MFDashboard from "./MFDashboard";
 
 const MFTabs = () => (
   <Tabs>
@@ -17,28 +16,28 @@ const MFTabs = () => (
     </TabList>
 
     <TabPanel>
-        <MFDashboard mfName="SBI"/>
+      <MFDashboard mfName="SBI" />
     </TabPanel>
     <TabPanel>
-      <MFDashboard mfName="HDFC"/>
+      <MFDashboard mfName="HDFC" />
     </TabPanel>
     <TabPanel>
-      <MFDashboard mfName="ICICI"/>
+      <MFDashboard mfName="ICICI" />
     </TabPanel>
     <TabPanel>
-      <MFDashboard mfName="KOTAK"/>
+      <MFDashboard mfName="KOTAK" />
     </TabPanel>
     <TabPanel>
-      <MFDashboard mfName="AXIS"/>
+      <MFDashboard mfName="AXIS" />
     </TabPanel>
     <TabPanel>
-      <MFDashboard mfName="TATA"/>
+      <MFDashboard mfName="TATA" />
     </TabPanel>
     <TabPanel>
-      <MFDashboard mfName="MAHINDRA"/>
+      <MFDashboard mfName="MAHINDRA" />
     </TabPanel>
     <TabPanel>
-      <MFDashboard mfName="NIPPON"/>
+      <MFDashboard mfName="NIPPON" />
     </TabPanel>
   </Tabs>
 );

@@ -1,7 +1,6 @@
-
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import SectorDashboard from './SectorDashboard';
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import SectorDashboard from "./SectorDashboard";
 
 const SectorTabs = () => (
   <Tabs>
@@ -13,16 +12,16 @@ const SectorTabs = () => (
     </TabList>
 
     <TabPanel>
-        <SectorDashboard sector="Pharma"/>
+      <SectorDashboard sector="Pharma" />
     </TabPanel>
     <TabPanel>
-      <SectorDashboard sector="Finance"/>
+      <SectorDashboard sector="Finance" />
     </TabPanel>
     <TabPanel>
-      <SectorDashboard sector="IT"/>
+      <SectorDashboard sector="IT" />
     </TabPanel>
     <TabPanel>
-      <SectorDashboard sector="Defence"/>
+      <SectorDashboard sector="Defence" />
     </TabPanel>
   </Tabs>
 );
