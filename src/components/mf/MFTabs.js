@@ -1,45 +1,34 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import MFDashboard from "./MFDashboard";
+import AgGrid from "../grid/AgGrid";
 
-const MFTabs = () => (
-  <Tabs>
-    <TabList>
-      <Tab>SBI</Tab>
-      <Tab>HDFC</Tab>
-      <Tab>ICICI</Tab>
-      <Tab>KOTAK</Tab>
-      <Tab>AXIS</Tab>
-      <Tab>TATA</Tab>
-      <Tab>MAHINDRA</Tab>
-      <Tab>NIPPON</Tab>
-    </TabList>
+const MFTabs = () => {
+  let mfTabs = [
+    "SBI",
+    "HDFC",
+    "ICICI",
+    "KOTAK",
+    "AXIS",
+    "TATA",
+    "MAHINDRA",
+    "NIPPON",
+    "QUANT",
+  ];
 
-    <TabPanel>
-      <MFDashboard mfName="SBI" />
-    </TabPanel>
-    <TabPanel>
-      <MFDashboard mfName="HDFC" />
-    </TabPanel>
-    <TabPanel>
-      <MFDashboard mfName="ICICI" />
-    </TabPanel>
-    <TabPanel>
-      <MFDashboard mfName="KOTAK" />
-    </TabPanel>
-    <TabPanel>
-      <MFDashboard mfName="AXIS" />
-    </TabPanel>
-    <TabPanel>
-      <MFDashboard mfName="TATA" />
-    </TabPanel>
-    <TabPanel>
-      <MFDashboard mfName="MAHINDRA" />
-    </TabPanel>
-    <TabPanel>
-      <MFDashboard mfName="NIPPON" />
-    </TabPanel>
-  </Tabs>
-);
+  return (
+    <Tabs>
+      <TabList>
+        {mfTabs.map((tab) => (
+          <Tab key={tab}>{tab}</Tab>
+        ))}
+      </TabList>
+      {mfTabs.map((tab) => (
+        <TabPanel key={tab}>
+          <AgGrid mfName={tab} />
+        </TabPanel>
+      ))}
+    </Tabs>
+  );
+};
 
 export default MFTabs;
