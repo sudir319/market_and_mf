@@ -11,6 +11,7 @@ class AgGrid extends Component {
       mfName: this.props.mfName,
       columns: null,
       rows: null,
+      tableHeight: null,
     };
   }
 
@@ -52,7 +53,12 @@ class AgGrid extends Component {
             return eachRow;
           });
 
-        this.setState({ ...this.state, columns: columns, rows: rows });
+        this.setState({
+          ...this.state,
+          columns: columns,
+          rows: rows,
+          tableHeight: rows.length * 43,
+        });
       });
   }
 
@@ -71,8 +77,12 @@ class AgGrid extends Component {
   };
 
   render() {
+    console.log(this.state.tableHeight);
     return (
-      <div className={"ag-theme-quartz"} style={{ height: 600 }}>
+      <div
+        className={"ag-theme-quartz"}
+        style={{ height: this.state.tableHeight ?? 600 }}
+      >
         {this.state.columns != null ? (
           <AgGridReact
             rowData={this.state.rows}
