@@ -24,7 +24,6 @@ class ApexChart extends Component {
         height: 350,
       },
       title: {
-        text: "CandleStick Chart : " + this.state.symbol,
         align: "left",
       },
       xaxis: {
@@ -59,6 +58,16 @@ class ApexChart extends Component {
     ];
     return (
       <div id="chart">
+        &nbsp;&nbsp;&nbsp;<b>CandleStick Chart : </b>
+        <a
+          href={
+            "https://in.tradingview.com/chart/8xSgAhXG/?symbol=NSE:" +
+            this.state.symbol
+          }
+          target="_blank"
+        >
+          {this.state.symbol}
+        </a>
         <ReactApexChart
           options={options}
           series={series}

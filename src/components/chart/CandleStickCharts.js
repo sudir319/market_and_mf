@@ -12,6 +12,17 @@ class CandleStickCharts extends Component {
       sort: this.props.sort,
       history: ["Week", "Month", "3 Months", "6 Months", "1 Year"],
       currentDuration: "Week",
+      pricesRange: [
+        "All",
+        "0-50",
+        "50-100",
+        "100-200",
+        "200-500",
+        "500-1000",
+        "1000-10000",
+        "10000-100000",
+      ],
+      currentPriceRange: "All",
       maxDate: date,
       showBullish: false,
       showBearish: false,
@@ -33,7 +44,7 @@ class CandleStickCharts extends Component {
   };
 
   filterCandleData = (candleData) => {
-    const newCandleData = {};
+    let newCandleData = {};
     if (this.state.showBullish || this.state.showBearish) {
       Object.keys(candleData).forEach((symbol) => {
         let lastCandle = candleData[symbol][candleData[symbol].length - 1];
@@ -44,10 +55,29 @@ class CandleStickCharts extends Component {
           newCandleData[symbol] = candleData[symbol];
         }
       });
-      return newCandleData;
     } else {
-      return candleData;
+      newCandleData = candleData;
     }
+
+    candleData = newCandleData;
+    newCandleData = {};
+
+    if (this.state.currentPriceRange !== "All") {
+      const prices = this.state.currentPriceRange.split("-");
+      const lowerPrice = parseInt(prices[0]);
+      const upperPrice = parseInt(prices[1]);
+      Object.keys(candleData).forEach((symbol) => {
+        let lastCandle = candleData[symbol][candleData[symbol].length - 1];
+        const lastClose = parseInt(lastCandle["close"]);
+        if (lastClose > lowerPrice && lastClose <= upperPrice) {
+          newCandleData[symbol] = candleData[symbol];
+        }
+      });
+    } else {
+      newCandleData = candleData;
+    }
+
+    return newCandleData;
   };
 
   specifyPeriod = (duration) => {
@@ -81,6 +111,10 @@ class CandleStickCharts extends Component {
 
   schollToTop = () => {
     window.scrollTo(0, 0);
+  };
+
+  setSelectedPriceRange = (e) => {
+    this.setState({ currentPriceRange: e.target.value });
   };
 
   render() {
@@ -130,6 +164,18 @@ class CandleStickCharts extends Component {
                     onClick={(event) => this.toggleShowBearish()}
                   />
                   Show Bearish
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td key="prices">
+                  Select Range:
+                  <select
+                    defaultValue={this.state.currentPriceRange}
+                    onChange={(event) => this.setSelectedPriceRange(event)}
+                  >
+                    {this.state.pricesRange.map((eachPriceRange) => (
+                      <option key={eachPriceRange}>{eachPriceRange}</option>
+                    ))}
+                  </select>
                 </td>
               </tr>
             </tbody>
