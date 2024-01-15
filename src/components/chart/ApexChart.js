@@ -65,6 +65,7 @@ class ApexChart extends Component {
             this.state.symbol
           }
           target="_blank"
+          rel="noopener noreferrer"
         >
           {this.state.symbol}
         </a>
