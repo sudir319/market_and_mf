@@ -20,7 +20,7 @@ export class IndexTabs extends Component {
         <Tabs>
           <TabList>
             {this.state["indices"].map((tab) => (
-              <Tab key={tab}>{tab}</Tab>
+              <Tab key={tab}>{tab.substring(6)}</Tab>
             ))}
           </TabList>
           {this.state["indices"].map((tab) => (
