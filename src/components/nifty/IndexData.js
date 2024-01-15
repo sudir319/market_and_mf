@@ -25,7 +25,7 @@ export class IndexData extends Component {
     return (
       <div>
         {this.state.data != null ? (
-          <CandleStickCharts data={this.state.data} />
+          <CandleStickCharts data={this.state.data} sort={true} />
         ) : (
           <div>Loading...</div>
         )}

@@ -9,6 +9,7 @@ class CandleStickCharts extends Component {
 
     this.state = {
       data: this.props.data,
+      sort: this.props.sort,
       history: ["Week", "Month", "3 Months", "6 Months", "1 Year"],
       currentDuration: "Week",
       maxDate: date,
@@ -84,6 +85,10 @@ class CandleStickCharts extends Component {
 
   render() {
     let candleData = this.filterCandleData(this.state.data);
+    let symbols = Object.keys(candleData);
+    if (this.state.sort) {
+      symbols = symbols.sort();
+    }
 
     return (
       <div>
@@ -92,7 +97,7 @@ class CandleStickCharts extends Component {
             <tbody>
               <tr>
                 {this.state.history.map((eachDuration) => (
-                  <td>
+                  <td key={eachDuration}>
                     <button onClick={() => this.specifyPeriod(eachDuration)}>
                       {eachDuration === this.state.currentDuration ? (
                         <b>{eachDuration}</b>
@@ -103,13 +108,13 @@ class CandleStickCharts extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   </td>
                 ))}
-                <td>
+                <td key="top">
                   <button onClick={(event) => this.schollToTop()}>
                     Scroll to Top
                   </button>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
-                <td>
+                <td key="bullish">
                   <input
                     type="checkbox"
                     value={this.state.showBullish}
@@ -118,7 +123,7 @@ class CandleStickCharts extends Component {
                   Show Bullish
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
-                <td>
+                <td key="bearish">
                   <input
                     type="checkbox"
                     value={this.state.showBearish}
@@ -133,17 +138,15 @@ class CandleStickCharts extends Component {
         <br />
         <hr />
         <div>
-          {Object.keys(candleData).length > 0 &&
-            Object.keys(candleData)
-              .sort()
-              .map((symbol, id) => (
-                <ApexChart
-                  key={id}
-                  symbol={symbol}
-                  maxDate={this.state.maxDate}
-                  candleData={candleData[symbol]}
-                />
-              ))}
+          {symbols != null &&
+            symbols.map((symbol, id) => (
+              <ApexChart
+                key={symbol}
+                symbol={symbol}
+                maxDate={this.state.maxDate}
+                candleData={candleData[symbol]}
+              />
+            ))}
         </div>
       </div>
     );

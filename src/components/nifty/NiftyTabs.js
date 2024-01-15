@@ -3,6 +3,7 @@ import "react-tabs/style/react-tabs.css";
 
 import React, { Component } from "react";
 import IndexTabs from "./IndexTabs";
+import TopPerformers from "./toppers/TopPerformers";
 
 export class NiftyTabs extends Component {
   constructor(props) {
@@ -27,10 +28,14 @@ export class NiftyTabs extends Component {
       return (
         <Tabs>
           <TabList>
+            <Tab key="topper">Toppers</Tab>
             {groups.map((tab) => (
               <Tab key={tab}>{tab}</Tab>
             ))}
           </TabList>
+          <TabPanel key="topper">
+            <TopPerformers />
+          </TabPanel>
           {groups.map((tab) => (
             <TabPanel key={tab}>
               <IndexTabs index={tab} indices={this.state.indices[tab]} />

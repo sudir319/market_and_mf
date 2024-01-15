@@ -58,7 +58,7 @@ class Industries extends Component {
       <div>
         {dropDown}
         {industryData != null ? (
-          <CandleStickCharts data={industryData} />
+          <CandleStickCharts data={industryData} sort={true} />
         ) : (
           <div>
             <br />
