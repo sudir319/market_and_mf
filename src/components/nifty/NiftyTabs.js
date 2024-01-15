@@ -28,19 +28,19 @@ export class NiftyTabs extends Component {
       return (
         <Tabs>
           <TabList>
-            <Tab key="topper">Toppers</Tab>
             {groups.map((tab) => (
               <Tab key={tab}>{tab}</Tab>
             ))}
+            <Tab key="topper">Toppers</Tab>
           </TabList>
-          <TabPanel key="topper">
-            <TopPerformers />
-          </TabPanel>
           {groups.map((tab) => (
             <TabPanel key={tab}>
               <IndexTabs index={tab} indices={this.state.indices[tab]} />
             </TabPanel>
           ))}
+          <TabPanel key="topper">
+            <TopPerformers />
+          </TabPanel>
         </Tabs>
       );
     }
