@@ -61,8 +61,7 @@ class ApexChart extends Component {
         &nbsp;&nbsp;&nbsp;<b>CandleStick Chart : </b>
         <a
           href={
-            "https://in.tradingview.com/chart/8xSgAhXG/?symbol=NSE:" +
-            this.state.symbol
+            "https://in.tradingview.com/chart/?symbol=NSE:" + this.state.symbol
           }
           target="_blank"
           rel="noopener noreferrer"

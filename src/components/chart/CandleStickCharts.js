@@ -124,6 +124,8 @@ class CandleStickCharts extends Component {
       symbols = symbols.sort();
     }
 
+    console.log(this.state);
+
     return (
       <div>
         <div align="center" style={{ position: "fixed", zIndex: 99 }}>

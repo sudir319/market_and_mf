@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import IndexTabs from "./IndexTabs";
 import TopPerformers from "./toppers/TopPerformers";
 import PricesRange from "./price/PricesRange";
+import TrendsList from "./trend/TrendsList";
 
 export class NiftyTabs extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ export class NiftyTabs extends Component {
             <Tab key="price">
               <nobr>Stocks By Price</nobr>
             </Tab>
+            <Tab key="trend">Trends</Tab>
           </TabList>
           {groups.map((tab) => (
             <TabPanel key={tab}>
@@ -47,6 +49,9 @@ export class NiftyTabs extends Component {
           </TabPanel>
           <TabPanel key="price">
             <PricesRange />
+          </TabPanel>
+          <TabPanel key="trend">
+            <TrendsList />
           </TabPanel>
         </Tabs>
       );
