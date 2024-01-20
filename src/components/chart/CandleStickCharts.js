@@ -80,7 +80,7 @@ class CandleStickCharts extends Component {
     return newCandleData;
   };
 
-  specifyPeriod = (duration) => {
+  specifyDuration = (duration) => {
     let date = new Date();
     switch (duration) {
       case "Week":
@@ -134,7 +134,7 @@ class CandleStickCharts extends Component {
               <tr>
                 {this.state.history.map((eachDuration) => (
                   <td key={eachDuration}>
-                    <button onClick={() => this.specifyPeriod(eachDuration)}>
+                    <button onClick={() => this.specifyDuration(eachDuration)}>
                       {eachDuration === this.state.currentDuration ? (
                         <b>{eachDuration}</b>
                       ) : (
