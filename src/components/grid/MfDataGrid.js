@@ -8,7 +8,7 @@ class MfDataGrid extends Component {
     super(props);
 
     this.state = {
-      data: null,
+      data: this.props.data,
       mfName: this.props.mfName,
       columns: null,
       rows: null,
@@ -16,11 +16,13 @@ class MfDataGrid extends Component {
     };
   }
 
-  prepareDataAndSetState = (response) => {
+  prepareDataAndSetState = (response, duration) => {
+    console.log(duration);
     let columnData = response[0];
     let columns = columnData.map((eachColumn) => {
       let eachField = {
         field: eachColumn,
+        headerName: eachColumn,
       };
 
       if (eachColumn === "Scheme Name") {
@@ -29,7 +31,11 @@ class MfDataGrid extends Component {
         eachField["flex"] = 1;
       }
 
-      if (eachColumn === "Manager" || eachColumn === "Scheme Name") {
+      if (
+        eachColumn === "Manager" ||
+        eachColumn === "Scheme Name" ||
+        eachColumn === duration
+      ) {
         eachField["filter"] = "agTextColumnFilter";
       }
 
@@ -65,16 +71,6 @@ class MfDataGrid extends Component {
     };
   };
 
-  componentDidMount() {
-    if (this.state.mfName) {
-      fetch("http://localhost:8080/mf/getMutualFundStats")
-        .then((response) => response.json())
-        .then((response) => {
-          this.setState({ data: response });
-        });
-    }
-  }
-
   getColumnStyle = (params) => {
     return { backgroundColor: "grey" };
   };
@@ -94,7 +90,7 @@ class MfDataGrid extends Component {
 
     if (this.state.data != null) {
       let { columns, rows, tableHeight } = this.prepareDataAndSetState(
-        this.state.data[this.state.mfName]
+        this.state.data
       );
 
       return (

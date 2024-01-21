@@ -10,6 +10,7 @@ class MfToppersDataGrid extends MfDataGrid {
     this.state = {
       duration: this.props.duration,
       data: this.props.data,
+      noOfFundsToShow: this.props.noOfFundsToShow,
       columns: null,
       rows: null,
       tableHeight: null,
@@ -17,9 +18,14 @@ class MfToppersDataGrid extends MfDataGrid {
   }
 
   render() {
-    console.log(this.state);
+    let data = this.props.data;
+    if (this.props.noOfFundsToShow !== "All") {
+      data = data.slice(0, this.props.noOfFundsToShow);
+    }
+
     let { columns, rows, tableHeight } = this.prepareDataAndSetState(
-      this.props.data
+      data,
+      this.props.duration
     );
 
     return (

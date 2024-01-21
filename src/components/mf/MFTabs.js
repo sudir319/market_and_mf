@@ -6,13 +6,17 @@ import ShowAllMFs from "./ShowAllMFs";
 import MFToppers from "./MFToppers";
 import MfDataGrid from "../grid/MfDataGrid";
 
-class MFTabs extends Component {
+import mfData from "../../json_data/mf_data_summary.json";
+
+class fewMfTabs extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fundManagers: null,
-      mfTabs: [
+      data: mfData["mf_data_summary"],
+      toppers: mfData["mf_top_performers"],
+      fundManagers: Object.keys(mfData["mf_data_summary"]).sort(),
+      fewMfTabs: [
         "SBI",
         "HDFC",
         "ICICI",
@@ -27,38 +31,39 @@ class MFTabs extends Component {
     };
   }
 
-  componentDidMount() {
-    fetch("http://localhost:8080/mf/getMutualFundManagers")
-      .then((response) => response.json())
-      .then((response) => this.setState({ fundManagers: response }));
-  }
-
   render() {
     return (
       <Tabs>
         <TabList>
-          {this.state.mfTabs.map((tab) => (
-            <Tab key={tab}>{tab}</Tab>
-          ))}
+          {this.state.fundManagers &&
+            this.state.fewMfTabs.map((tab) => (
+              <Tab key={tab} data={this.state.data[tab]}>
+                {tab}
+              </Tab>
+            ))}
           {this.state.fundManagers && (
             <>
-              <Tab>Others</Tab>
+              <Tab>All MFs</Tab>
               <Tab>Toppers</Tab>
             </>
           )}
         </TabList>
-        {this.state.mfTabs.map((tab) => (
-          <TabPanel key={tab}>
-            <MfDataGrid mfName={tab} />
-          </TabPanel>
-        ))}
+        {this.state.fundManagers &&
+          this.state.fewMfTabs.map((tab) => (
+            <TabPanel key={tab}>
+              <MfDataGrid mfName={tab} data={this.state.data[tab]} />
+            </TabPanel>
+          ))}
         {this.state.fundManagers && (
           <>
             <TabPanel>
-              <ShowAllMFs fundManagers={this.state.fundManagers} />
+              <ShowAllMFs
+                fundManagers={this.state.fundManagers}
+                data={this.state.data}
+              />
             </TabPanel>
             <TabPanel>
-              <MFToppers />
+              <MFToppers data={this.state.toppers} />
             </TabPanel>
           </>
         )}
@@ -67,4 +72,4 @@ class MFTabs extends Component {
   }
 }
 
-export default MFTabs;
+export default fewMfTabs;

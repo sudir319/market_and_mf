@@ -5,10 +5,13 @@ class MFToppers extends Component {
   constructor(props) {
     super(props);
 
+    let noOfFundsList = [20, 50, 100, 200, 500, "All"];
     this.state = {
-      history: ["1D", "7D", "15D", "1M", "2M", "3M", "6M", "9M", "1Y"],
-      duration: "1D",
-      data: null,
+      history: Object.keys(this.props.data),
+      duration: Object.keys(this.props.data)[0],
+      data: this.props.data,
+      fundCountsToShow: noOfFundsList,
+      noOfFundsToShow: noOfFundsList[0],
     };
   }
 
@@ -16,11 +19,9 @@ class MFToppers extends Component {
     this.setState({ ...this.state, duration: duration });
   };
 
-  componentDidMount() {
-    fetch("http://localhost:8080/mf/getMutualFundToppers")
-      .then((response) => response.json())
-      .then((response) => this.setState({ data: response }));
-  }
+  setNoOfFundsToShow = (event) => {
+    this.setState({ ...this.state, noOfFundsToShow: event.target.value });
+  };
 
   render() {
     console.log(this.state);
@@ -46,6 +47,18 @@ class MFToppers extends Component {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   </td>
                 ))}
+                <td>
+                  Show Top&nbsp;
+                  <select
+                    defaultValue={this.state.noOfFundsToShow}
+                    onChange={(event) => this.setNoOfFundsToShow(event)}
+                  >
+                    {this.state.fundCountsToShow.map((eachCount) => (
+                      <option key={eachCount}>{eachCount}</option>
+                    ))}
+                  </select>
+                  &nbsp;funds
+                </td>
               </tr>
             </tbody>
           </table>
@@ -65,6 +78,7 @@ class MFToppers extends Component {
             key={this.state.duration}
             duration={this.state.duration}
             data={this.state.data[this.state.duration]}
+            noOfFundsToShow={this.state.noOfFundsToShow}
           />
         ) : (
           <div>Loading...</div>

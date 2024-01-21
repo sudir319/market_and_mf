@@ -6,7 +6,8 @@ class ShowAllMFs extends Component {
     super(props);
     this.state = {
       fundManagers: this.props.fundManagers,
-      selectedMf: null,
+      selectedMf: this.props.fundManagers[0],
+      data: this.props.data,
     };
   }
 
@@ -18,12 +19,11 @@ class ShowAllMFs extends Component {
     return (
       <div>
         <div align="center">
-          Select Fund Manager :
+          Select Fund Manager:&nbsp;&nbsp;
           <select
             defaultValue={this.state.selectedMf}
             onChange={(event) => this.setSelectedMf(event)}
           >
-            <option key="--">--</option>
             {this.state.fundManagers.map((eachFm) => (
               <option key={eachFm}>{eachFm}</option>
             ))}
@@ -34,6 +34,7 @@ class ShowAllMFs extends Component {
           <MfDataGrid
             key={this.state.selectedMf}
             mfName={this.state.selectedMf}
+            data={this.state.data[this.state.selectedMf]}
           />
         )}
       </div>
