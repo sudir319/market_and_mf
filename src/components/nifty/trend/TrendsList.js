@@ -14,8 +14,8 @@ class TrendsList extends Component {
             ))}
           </TabList>
           {trends.map((eachTrend) => (
-            <TabPanel>
-              <TrendData key={eachTrend} trend={eachTrend} />
+            <TabPanel key={eachTrend}>
+              <TrendData trend={eachTrend} />
             </TabPanel>
           ))}
         </Tabs>

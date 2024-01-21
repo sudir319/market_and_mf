@@ -1,22 +1,33 @@
 import React, { Component } from "react";
 import CandleStickCharts from "../chart/CandleStickCharts";
+import niftyDataSummary from "./../../json_data/nifty_data_summary.json";
 
 class Industries extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      industries: ["All Industries", ...this.props.industries],
-      selectedIndustry: this.props.industries[0],
-      allIndustriesData: null,
-    };
-  }
-  componentDidMount() {
-    fetch("http://localhost:8080/data/dataSummaryForAllIndustries")
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({ ...this.state, allIndustriesData: response });
+    console.log(this.props.industries);
+
+    const allIndustriesData = {};
+    const industries = Object.keys(this.props.industries);
+    const niftyCandleData = niftyDataSummary["nifty_candle_data"];
+
+    industries.forEach((eachIndustry) => {
+      const eachIndustryData = this.props.industries[eachIndustry];
+      const eachIndustryObject = {};
+      eachIndustryData.forEach((eachStock) => {
+        eachIndustryObject[eachStock["symbol"]] =
+          niftyCandleData[eachStock["symbol"]];
       });
+
+      allIndustriesData[eachIndustry] = eachIndustryObject;
+    });
+
+    this.state = {
+      industries: ["All Industries", ...Object.keys(this.props.industries)],
+      selectedIndustry: Object.keys(this.props.industries)[0],
+      allIndustriesData: allIndustriesData,
+    };
   }
 
   setSelectedIndustry = (e) => {
@@ -24,11 +35,12 @@ class Industries extends Component {
   };
 
   render() {
+    console.log(this.state);
     let industryData = null;
     if (this.state.allIndustriesData != null) {
       if (this.state.selectedIndustry === "All Industries") {
         industryData = {};
-        this.props.industries
+        this.state.industries
           .filter((eachIndustry) => eachIndustry !== "All Industries")
           .forEach((eachIndustry) => {
             let eachIndustryData = this.state.allIndustriesData[eachIndustry];
@@ -53,6 +65,8 @@ class Industries extends Component {
         </select>
       </div>
     );
+
+    console.log("industryData: ", industryData);
 
     return (
       <div>

@@ -7,26 +7,35 @@ import TopPerformers from "./toppers/TopPerformers";
 import PricesRange from "./price/PricesRange";
 import TrendsList from "./trend/TrendsList";
 
+import niftyDataSummary from "./../../json_data/nifty_data_summary.json";
+
 export class NiftyTabs extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      indices: null,
+      indices: niftyDataSummary["stocks_by_group"],
     };
   }
-  componentDidMount() {
-    fetch("http://localhost:8080/data/indicesSummary")
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({ indices: response });
-      });
-  }
+
   render() {
+    console.log(this.state);
+
     let content = <div>Loading....</div>;
 
     if (this.state.indices) {
       let groups = Object.keys(this.state.indices);
+      console.log(groups);
+      // Reorder the tabs for requirement..
+      try {
+        groups.splice(groups.indexOf("Sector"), 1);
+        groups.splice(groups.indexOf("Industry"), 1);
+        groups.push("Sector");
+        groups.push("Industry");
+      } catch (err) {
+        groups = Object.keys(this.state.indices);
+      }
+
       return (
         <Tabs>
           <TabList>

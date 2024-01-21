@@ -1,34 +1,31 @@
 import React, { Component } from "react";
 import CandleStickCharts from "../chart/CandleStickCharts";
+import niftyDataSummary from "./../../json_data/nifty_data_summary.json";
 
 export class IndexData extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      index: this.props.index,
-      data: null,
-    };
+    console.log(this.props);
+    this.state = {};
   }
-
-  componentDidMount() {
-    fetch(
-      "http://localhost:8080/data/indicesDataSummaryByIndex/" + this.state.index
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({ data: response });
-      });
-  }
-
   render() {
+    const niftyCandleData = niftyDataSummary["nifty_candle_data"];
+    let stocks = this.props.stocks
+      .filter((data, index) => index > 0)
+      .map((data) => data["symbol"]);
+
+    console.log(stocks);
+
+    let data = {};
+    stocks.forEach((eachStock) => {
+      data[eachStock] = niftyCandleData[eachStock];
+    });
+
+    console.log(data);
+
     return (
       <div>
-        {this.state.data != null ? (
-          <CandleStickCharts data={this.state.data} sort={true} />
-        ) : (
-          <div>Loading...</div>
-        )}
+        <CandleStickCharts data={data} sort={true} />
       </div>
     );
   }

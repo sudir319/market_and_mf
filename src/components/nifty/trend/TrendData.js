@@ -1,26 +1,16 @@
 import React, { Component } from "react";
 import CandleStickCharts from "../../chart/CandleStickCharts";
+import niftyDataSummary from "../../../json_data/nifty_data_summary.json";
 
 class TrendData extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      data: null,
+      data: niftyDataSummary["nifty_candle_data"],
       trend: this.props.trend,
       days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       selectedDay: 3,
     };
-  }
-
-  componentDidMount() {
-    fetch(
-      "http://localhost:8080/data/indicesDataSummaryByIndex/NIFTY TOTAL MARKET"
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        this.setState({ data: response });
-      });
   }
 
   setSelecteddays = (e) => {

@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import CandleStickCharts from "../../chart/CandleStickCharts";
+import niftyDataSummary from "../../../json_data/nifty_data_summary.json";
 
 class StocksByPrice extends Component {
   constructor(props) {
     super(props);
 
+    const stocksData = {};
+    const niftyCandleData = niftyDataSummary["nifty_candle_data"];
+    console.log(props);
+    this.props.data
+      .map((eachStock) => eachStock["symbol"])
+      .forEach(
+        (eachSymbol) => (stocksData[eachSymbol] = niftyCandleData[eachSymbol])
+      );
+
     this.state = {
       priceRange: this.props.priceRange,
-      data: null,
+      data: stocksData,
     };
-  }
-
-  componentDidMount() {
-    fetch("http://localhost:8080/data/stocksByPrice/" + this.state.priceRange)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        console.log(Object.keys(response));
-        this.setState({ data: response });
-      });
   }
 
   render() {

@@ -187,14 +187,17 @@ class CandleStickCharts extends Component {
         <hr />
         <div>
           {symbols != null &&
-            symbols.map((symbol, id) => (
-              <ApexChart
-                key={symbol}
-                symbol={symbol}
-                maxDate={this.state.maxDate}
-                candleData={candleData[symbol]}
-              />
-            ))}
+            symbols.map(
+              (symbol, id) =>
+                candleData[symbol] && (
+                  <ApexChart
+                    key={symbol}
+                    symbol={symbol}
+                    maxDate={this.state.maxDate}
+                    candleData={candleData[symbol]}
+                  />
+                )
+            )}
         </div>
       </div>
     );

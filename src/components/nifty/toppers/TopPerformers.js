@@ -13,6 +13,7 @@ function TopPerformers() {
           <Tab>2 Months</Tab>
           <Tab>3 Months</Tab>
           <Tab>6 Months</Tab>
+          <Tab>9 Months</Tab>
           <Tab>1 Year</Tab>
         </TabList>
         <TabPanel>
