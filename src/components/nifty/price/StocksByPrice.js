@@ -9,11 +9,9 @@ class StocksByPrice extends Component {
     const stocksData = {};
     const niftyCandleData = niftyDataSummary["nifty_candle_data"];
     console.log(props);
-    this.props.data
-      .map((eachStock) => eachStock["symbol"])
-      .forEach(
-        (eachSymbol) => (stocksData[eachSymbol] = niftyCandleData[eachSymbol])
-      );
+    this.props.data.forEach(
+      (eachSymbol) => (stocksData[eachSymbol] = niftyCandleData[eachSymbol])
+    );
 
     this.state = {
       priceRange: this.props.priceRange,

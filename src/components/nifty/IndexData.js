@@ -10,9 +10,7 @@ export class IndexData extends Component {
   }
   render() {
     const niftyCandleData = niftyDataSummary["nifty_candle_data"];
-    let stocks = this.props.stocks
-      .filter((data, index) => index > 0)
-      .map((data) => data["symbol"]);
+    let stocks = this.props.stocks;
 
     console.log(stocks);
 

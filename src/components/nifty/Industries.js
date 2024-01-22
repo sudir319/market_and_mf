@@ -16,8 +16,7 @@ class Industries extends Component {
       const eachIndustryData = this.props.industries[eachIndustry];
       const eachIndustryObject = {};
       eachIndustryData.forEach((eachStock) => {
-        eachIndustryObject[eachStock["symbol"]] =
-          niftyCandleData[eachStock["symbol"]];
+        eachIndustryObject[eachStock] = niftyCandleData[eachStock];
       });
 
       allIndustriesData[eachIndustry] = eachIndustryObject;

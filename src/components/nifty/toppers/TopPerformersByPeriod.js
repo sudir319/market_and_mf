@@ -14,11 +14,9 @@ class TopPerformersByPeriod extends Component {
       0,
       this.props.stockCount
     );
-    dataPerDuration
-      .map((eachStock) => eachStock["symbol"])
-      .forEach(
-        (eachSymbol) => (stocksData[eachSymbol] = niftyCandleData[eachSymbol])
-      );
+    dataPerDuration.forEach(
+      (eachSymbol) => (stocksData[eachSymbol] = niftyCandleData[eachSymbol])
+    );
 
     this.state = {
       duration: this.props.duration,

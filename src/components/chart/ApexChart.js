@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactApexChart from "react-apexcharts";
+import niftyDataSummary from "../../json_data/nifty_data_summary.json";
 
 class ApexChart extends Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class ApexChart extends Component {
   }
 
   render() {
+    const symbolVsStockInfo = niftyDataSummary["symbol_vs_stock_info"];
+
     const options = {
       chart: {
         type: "candlestick",
@@ -59,6 +62,7 @@ class ApexChart extends Component {
     return (
       <div id="chart">
         &nbsp;&nbsp;&nbsp;<b>CandleStick Chart : </b>
+        {symbolVsStockInfo[this.state.symbol]["company"]} :&nbsp;
         <a
           href={
             "https://in.tradingview.com/chart/?symbol=NSE:" + this.state.symbol
