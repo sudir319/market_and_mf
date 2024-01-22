@@ -67,10 +67,12 @@ class CandleStickCharts extends Component {
       const lowerPrice = parseInt(prices[0]);
       const upperPrice = parseInt(prices[1]);
       Object.keys(candleData).forEach((symbol) => {
-        let lastCandle = candleData[symbol][candleData[symbol].length - 1];
-        const lastClose = parseInt(lastCandle["close"]);
-        if (lastClose > lowerPrice && lastClose <= upperPrice) {
-          newCandleData[symbol] = candleData[symbol];
+        if (candleData[symbol]) {
+          let lastCandle = candleData[symbol][candleData[symbol].length - 1];
+          const lastClose = parseInt(lastCandle["close"]);
+          if (lastClose > lowerPrice && lastClose <= upperPrice) {
+            newCandleData[symbol] = candleData[symbol];
+          }
         }
       });
     } else {
