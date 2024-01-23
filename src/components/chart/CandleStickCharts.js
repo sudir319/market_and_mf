@@ -190,7 +190,7 @@ class CandleStickCharts extends Component {
         <br />
         <hr />
         <div>
-          {symbols != null &&
+          {symbols != null && symbols.length > 0 ? (
             symbols.map(
               (symbol, id) =>
                 candleData[symbol] && (
@@ -201,7 +201,10 @@ class CandleStickCharts extends Component {
                     candleData={candleData[symbol]}
                   />
                 )
-            )}
+            )
+          ) : (
+            <div align="center">No Data Found...!!!</div>
+          )}
         </div>
       </div>
     );
