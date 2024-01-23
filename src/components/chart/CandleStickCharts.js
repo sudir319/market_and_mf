@@ -47,12 +47,14 @@ class CandleStickCharts extends Component {
     let newCandleData = {};
     if (this.state.showBullish || this.state.showBearish) {
       Object.keys(candleData).forEach((symbol) => {
-        let lastCandle = candleData[symbol][candleData[symbol].length - 1];
-        if (
-          (this.state.showBullish && lastCandle.close > lastCandle.open) ||
-          (this.state.showBearish && lastCandle.close < lastCandle.open)
-        ) {
-          newCandleData[symbol] = candleData[symbol];
+        if (candleData[symbol]) {
+          let lastCandle = candleData[symbol][candleData[symbol].length - 1];
+          if (
+            (this.state.showBullish && lastCandle.close > lastCandle.open) ||
+            (this.state.showBearish && lastCandle.close < lastCandle.open)
+          ) {
+            newCandleData[symbol] = candleData[symbol];
+          }
         }
       });
     } else {
