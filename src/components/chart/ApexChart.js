@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactApexChart from "react-apexcharts";
 import niftyDataSummary from "../../json_data/nifty_data_summary.json";
-import { findPatterns } from "../utils/TechnicalIndicators";
+import { findPatterns } from "../utils/Candlesticks";
 
 class ApexChart extends Component {
   constructor(props) {
@@ -63,8 +63,6 @@ class ApexChart extends Component {
 
     const patterns = findPatterns(this.state.candleData.slice(0, 3));
 
-    console.log();
-
     return (
       <div id="chart">
         &nbsp;&nbsp;&nbsp;<b>CandleStick Chart : </b>
@@ -78,7 +76,7 @@ class ApexChart extends Component {
         >
           {this.state.symbol}
         </a>
-        {" : Candle Patterns : "}
+        {patterns.length > 0 && " : Candle Patterns : "}
         <b>{patterns.join(" | ")}</b>
         <ReactApexChart
           options={options}

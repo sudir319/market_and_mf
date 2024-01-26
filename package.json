@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "ag-grid-react": "^31.0.1",
     "apexcharts": "^3.45.1",
+    "candlestick": "^0.0.5",
     "os-browserify": "^0.3.0",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
