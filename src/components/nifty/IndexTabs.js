@@ -22,9 +22,11 @@ export class IndexTabs extends Component {
       return (
         <Tabs>
           <TabList>
-            {Object.keys(this.state.indices[this.state.index]).map((tab) => (
-              <Tab key={tab}>{tab.substring(6)}</Tab>
-            ))}
+            {Object.keys(this.state.indices[this.state.index])
+              .sort()
+              .map((tab) => (
+                <Tab key={tab}>{tab.substring(6)}</Tab>
+              ))}
           </TabList>
           {Object.keys(this.state.indices[this.state.index]).map((tab) => (
             <TabPanel key={tab}>
