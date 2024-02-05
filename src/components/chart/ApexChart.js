@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactApexChart from "react-apexcharts";
 import niftyDataSummary from "../../json_data/nifty_data_summary.json";
+import dataSummary from "../../json_data/market_data_summary.json";
 
 class ApexChart extends Component {
   constructor(props) {
@@ -19,7 +20,13 @@ class ApexChart extends Component {
   }
 
   render() {
-    const symbolVsStockInfo = niftyDataSummary["symbol_vs_stock_info"];
+    let symbolVsStockInfo;
+    if (this.props.market) {
+      symbolVsStockInfo =
+        dataSummary[this.props.market]["symbol_vs_stock_info"];
+    } else {
+      symbolVsStockInfo = niftyDataSummary["symbol_vs_stock_info"];
+    }
 
     const options = {
       chart: {
@@ -62,14 +69,18 @@ class ApexChart extends Component {
 
     return (
       <div id="chart">
-        &nbsp;&nbsp;&nbsp;<b>Candle Stick Chart : </b>
+        &nbsp;&nbsp;&nbsp;<b>Candle Stick Chart</b> : {this.props.market}{" "}
+        :&nbsp;
         {symbolVsStockInfo[this.state.symbol]
           ? symbolVsStockInfo[this.state.symbol]["company"]
           : this.state.symbol}
-        :&nbsp;
+        &nbsp;:&nbsp;
         <a
           href={
-            "https://in.tradingview.com/chart/?symbol=NSE:" + this.state.symbol
+            "https://in.tradingview.com/chart/?symbol=" +
+            (this.props.market ? this.props.market : "NSE") +
+            ":" +
+            this.state.symbol
           }
           target="_blank"
           rel="noopener noreferrer"

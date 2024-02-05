@@ -10,7 +10,7 @@ class CandleStickCharts extends Component {
     this.state = {
       data: this.props.data,
       sort: this.props.sort,
-      history: ["Week", "Month", "3 Months", "6 Months", "1 Year"],
+      history: ["Week", "Month", "2 Months", "3 Months", "6 Months"],
       currentDuration: "Week",
       pricesRange: [
         "All",
@@ -93,14 +93,14 @@ class CandleStickCharts extends Component {
       case "Month":
         date.setMonth(date.getMonth() - 1);
         break;
+      case "2 Months":
+        date.setMonth(date.getMonth() - 2);
+        break;
       case "3 Months":
         date.setMonth(date.getMonth() - 3);
         break;
       case "6 Months":
         date.setMonth(date.getMonth() - 6);
-        break;
-      case "1 Year":
-        date.setYear(date.getYear() - 1);
         break;
       default:
         break;
@@ -195,6 +195,7 @@ class CandleStickCharts extends Component {
               (symbol, id) =>
                 candleData[symbol] && (
                   <ApexChart
+                    market={this.props.market}
                     key={symbol}
                     symbol={symbol}
                     maxDate={this.state.maxDate}

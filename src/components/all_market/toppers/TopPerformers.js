@@ -16,28 +16,28 @@ function TopPerformers({ market }) {
         <Tab>1 Year</Tab>
       </TabList>
       <TabPanel>
-        <TopPerformersByPeriod market={market} duration="1W" stockCount="10" />
+        <TopPerformersByPeriod market={market} duration="1W" stockCount="100" />
       </TabPanel>
       <TabPanel>
-        <TopPerformersByPeriod market={market} duration="2W" stockCount="25" />
+        <TopPerformersByPeriod market={market} duration="2W" stockCount="100" />
       </TabPanel>
       <TabPanel>
-        <TopPerformersByPeriod market={market} duration="1M" stockCount="20" />
+        <TopPerformersByPeriod market={market} duration="1M" stockCount="150" />
       </TabPanel>
       <TabPanel>
-        <TopPerformersByPeriod market={market} duration="2M" stockCount="25" />
+        <TopPerformersByPeriod market={market} duration="2M" stockCount="150" />
       </TabPanel>
       <TabPanel>
-        <TopPerformersByPeriod market={market} duration="3M" stockCount="30" />
+        <TopPerformersByPeriod market={market} duration="3M" stockCount="200" />
       </TabPanel>
       <TabPanel>
-        <TopPerformersByPeriod market={market} duration="6M" stockCount="50" />
+        <TopPerformersByPeriod market={market} duration="6M" stockCount="200" />
       </TabPanel>
       <TabPanel>
-        <TopPerformersByPeriod market={market} duration="9M" stockCount="75" />
+        <TopPerformersByPeriod market={market} duration="9M" stockCount="250" />
       </TabPanel>
       <TabPanel>
-        <TopPerformersByPeriod market={market} duration="1Y" stockCount="100" />
+        <TopPerformersByPeriod market={market} duration="1Y" stockCount="300" />
       </TabPanel>
     </Tabs>
   );
