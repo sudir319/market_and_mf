@@ -1,30 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import TrendData from "./TrendData";
 
-class TrendsList extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    let trends = ["Bullish", "Bearish"];
-    return (
-      <div>
-        <Tabs>
-          <TabList>
-            {trends.map((eachTrend) => (
-              <Tab key={eachTrend}>{eachTrend}</Tab>
-            ))}
-          </TabList>
+const TrendsList = ({market}) => {
+  let trends = ["Bullish", "Bearish"];
+  return (
+    <div>
+      <Tabs>
+        <TabList>
           {trends.map((eachTrend) => (
-            <TabPanel key={eachTrend}>
-              <TrendData trend={eachTrend} market={this.props.market} />
-            </TabPanel>
+            <Tab key={eachTrend}>{eachTrend}</Tab>
           ))}
-        </Tabs>
-      </div>
-    );
-  }
+        </TabList>
+        {trends.map((eachTrend) => (
+          <TabPanel key={eachTrend}>
+            <TrendData trend={eachTrend} market={this.props.market} />
+          </TabPanel>
+        ))}
+      </Tabs>
+    </div>
+  );
 }
 
 export default TrendsList;
