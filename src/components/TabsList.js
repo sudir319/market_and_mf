@@ -3,6 +3,7 @@ import "react-tabs/style/react-tabs.css";
 import MFTabs from "./mf/MFTabs";
 import NiftyTabs from "./nifty/NiftyTabs";
 import AllMarket from "./all_market/AllMarket";
+import BuildInfo from "./BuildInfo";
 
 const TabsList = () => (
   <Tabs>
@@ -16,6 +17,9 @@ const TabsList = () => (
       <Tab>
         <nobr>Markets</nobr>
       </Tab>
+      <Tab>
+        <nobr>Build Info</nobr>
+      </Tab>
     </TabList>
     <TabPanel>
       <NiftyTabs />
@@ -25,6 +29,9 @@ const TabsList = () => (
     </TabPanel>
     <TabPanel>
       <AllMarket />
+    </TabPanel>
+    <TabPanel>
+      <BuildInfo />
     </TabPanel>
   </Tabs>
 );
