@@ -23,7 +23,7 @@ export class IndexData extends Component {
 
     return (
       <div>
-        <CandleStickCharts data={data} sort={true} />
+        <CandleStickCharts market="NSE" data={data} sort={true} />
       </div>
     );
   }

@@ -28,7 +28,7 @@ class TopPerformersByPeriod extends Component {
     return (
       <div>
         {this.state.data != null ? (
-          <CandleStickCharts data={this.state.data} sort={false} />
+          <CandleStickCharts market="NSE" data={this.state.data} sort={false} />
         ) : (
           <div>Loading...</div>
         )}

@@ -58,7 +58,7 @@ class TrendData extends Component {
           </select>
         </div>
         {data != null ? (
-          <CandleStickCharts data={data} sort={false} />
+          <CandleStickCharts market="NSE" data={data} sort={false} />
         ) : (
           <div>Loading...</div>
         )}

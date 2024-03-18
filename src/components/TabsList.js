@@ -4,6 +4,7 @@ import MFTabs from "./mf/MFTabs";
 import NiftyTabs from "./nifty/NiftyTabs";
 import AllMarket from "./all_market/AllMarket";
 import BuildInfo from "./BuildInfo";
+import CryptoTabs from "./crypto/CryptoTabs";
 
 const TabsList = () => (
   <Tabs>
@@ -18,6 +19,9 @@ const TabsList = () => (
         <nobr>Markets</nobr>
       </Tab>
       <Tab>
+        <nobr>Crypto</nobr>
+      </Tab>
+      <Tab>
         <nobr>Build Info</nobr>
       </Tab>
     </TabList>
@@ -29,6 +33,9 @@ const TabsList = () => (
     </TabPanel>
     <TabPanel>
       <AllMarket />
+    </TabPanel>
+    <TabPanel>
+      <CryptoTabs />
     </TabPanel>
     <TabPanel>
       <BuildInfo />

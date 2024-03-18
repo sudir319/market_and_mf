@@ -75,18 +75,20 @@ class ApexChart extends Component {
           ? symbolVsStockInfo[this.state.symbol]["company"]
           : this.state.symbol}
         &nbsp;:&nbsp;
-        <a
-          href={
-            "https://in.tradingview.com/chart/?symbol=" +
-            (this.props.market ? this.props.market : "NSE") +
-            ":" +
-            this.state.symbol
-          }
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {this.state.symbol}
-        </a>
+        {this.props.market != null && (
+          <a
+            href={
+              "https://in.tradingview.com/chart/?symbol=" +
+              (this.props.market ? this.props.market : "NSE") +
+              ":" +
+              this.state.symbol
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {this.state.symbol}
+          </a>
+        )}
         <ReactApexChart
           options={options}
           series={series}

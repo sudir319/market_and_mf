@@ -23,7 +23,7 @@ class StocksByPrice extends Component {
     return (
       <div>
         {this.state.data != null ? (
-          <CandleStickCharts data={this.state.data} sort={true} />
+          <CandleStickCharts market="NSE" data={this.state.data} sort={true} />
         ) : (
           <div>Loading...</div>
         )}
