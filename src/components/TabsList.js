@@ -10,10 +10,10 @@ const TabsList = () => (
   <Tabs>
     <TabList>
       <Tab>
-        <nobr>NIFTY</nobr>
+        <nobr>Mutual Funds</nobr>
       </Tab>
       <Tab>
-        <nobr>Mutual Funds</nobr>
+        <nobr>NIFTY</nobr>
       </Tab>
       <Tab>
         <nobr>Markets</nobr>
@@ -26,10 +26,10 @@ const TabsList = () => (
       </Tab>
     </TabList>
     <TabPanel>
-      <NiftyTabs />
+      <MFTabs />
     </TabPanel>
     <TabPanel>
-      <MFTabs />
+      <NiftyTabs />
     </TabPanel>
     <TabPanel>
       <AllMarket />
