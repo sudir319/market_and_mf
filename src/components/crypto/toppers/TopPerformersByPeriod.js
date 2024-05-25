@@ -21,6 +21,7 @@ class TopPerformersByPeriod extends Component {
     this.state = {
       duration: this.props.duration,
       data: stocksData,
+      fullNames: cryptoDataSummary["full_names"],
     };
   }
 
@@ -28,7 +29,11 @@ class TopPerformersByPeriod extends Component {
     return (
       <div>
         {this.state.data != null ? (
-          <CandleStickCharts data={this.state.data} sort={false} />
+          <CandleStickCharts
+            fullNames={this.state.fullNames}
+            data={this.state.data}
+            sort={false}
+          />
         ) : (
           <div>Loading...</div>
         )}

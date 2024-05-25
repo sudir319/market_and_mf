@@ -9,6 +9,7 @@ class ApexChart extends Component {
     this.state = {
       symbol: this.props.symbol,
       candleData: this.props.candleData,
+      fullName: this.props.fullName,
     };
   }
 
@@ -74,7 +75,7 @@ class ApexChart extends Component {
         {symbolVsStockInfo[this.state.symbol]
           ? symbolVsStockInfo[this.state.symbol]["company"]
           : this.state.symbol}
-        &nbsp;:&nbsp;
+        &nbsp;: {this.state.fullName ?? this.state.fullName} &nbsp;
         {this.props.market != null && (
           <a
             href={

@@ -16,6 +16,7 @@ class StocksByPrice extends Component {
     this.state = {
       priceRange: this.props.priceRange,
       data: stocksData,
+      fullNames: this.props.fullNames,
     };
   }
 
@@ -23,7 +24,11 @@ class StocksByPrice extends Component {
     return (
       <div>
         {this.state.data != null ? (
-          <CandleStickCharts data={this.state.data} sort={true} />
+          <CandleStickCharts
+            data={this.state.data}
+            sort={true}
+            fullNames={this.props.fullNames}
+          />
         ) : (
           <div>Loading...</div>
         )}

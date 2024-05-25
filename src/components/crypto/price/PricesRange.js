@@ -22,6 +22,7 @@ function PricesRange() {
             <StocksByPrice
               priceRange={priceRange}
               data={stocksByPricesRange[priceRange]}
+              fullNames={cryptoDataSummary["full_names"]}
             />
           </TabPanel>
         ))}

@@ -7,6 +7,7 @@ class TrendData extends Component {
     super(props);
     this.state = {
       data: cryptoDataSummary["crypto_candle_data"],
+      fullNames: cryptoDataSummary["full_names"],
       trend: this.props.trend,
       days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       selectedDay: 3,
@@ -58,7 +59,11 @@ class TrendData extends Component {
           </select>
         </div>
         {data != null ? (
-          <CandleStickCharts data={data} sort={false} />
+          <CandleStickCharts
+            data={data}
+            sort={false}
+            fullNames={this.state.fullNames}
+          />
         ) : (
           <div>Loading...</div>
         )}

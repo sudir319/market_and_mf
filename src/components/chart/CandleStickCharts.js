@@ -6,9 +6,9 @@ class CandleStickCharts extends Component {
     super(props);
     const date = new Date();
     date.setDate(date.getDate() - 7);
-
     this.state = {
       data: this.props.data,
+      fullNames: this.props.fullNames,
       sort: this.props.sort,
       history: ["Week", "Month", "2 Months", "3 Months", "6 Months"],
       currentDuration: "Week",
@@ -202,6 +202,7 @@ class CandleStickCharts extends Component {
                     market={this.props.market}
                     key={symbol}
                     symbol={symbol}
+                    fullName={this.state.fullNames?.[symbol]}
                     maxDate={this.state.maxDate}
                     candleData={candleData[symbol]}
                   />
